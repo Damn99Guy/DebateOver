@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>DebateOver | Certificato di Ragione Ufficiale</title>
+    
+    <!-- Google Fonts: Cinzel per lo stile formale/regale, Plus Jakarta Sans per la leggibilità moderna -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Windsong:wght@500&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome per icone premium -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #111116;
+            --bg-card: #171721;
+            --bg-card-hover: #1e1e2b;
+            --gold: #ffcc00;
+            --gold-secondary: #d4af37;
+            --gold-gradient: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
+            --gold-glow: 0 0 20px rgba(255, 204, 0, 0.2);
+            --gold-glow-strong: 0 0 35px rgba(255, 204, 0, 0.4);
+            --text-main: #ffffff;
+            --text-muted: #9e9eb4;
+            --border-color: rgba(255, 204, 0, 0.15);
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-signature: 'Windsong', cursive;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header / Navbar */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(17, 17, 22, 0.85);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-badge {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-family: var(--font-body);
+            font-weight: 800;
+            background: var(--gold-gradient);
+            color: #000;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 1px;
+            vertical-align: middle;
+            box-shadow: 0 2px 10px rgba(255, 204, 0, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+        }
+
+        .btn-nav {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-nav:hover {
+            background: var(--gold-gradient);
+            color: #000;
+            box-shadow: var(--gold-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 100px 0 80px 0;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Glowing background orbs */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 204, 0, 0.12) 0%, rgba(17, 17, 22, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .hero-badge-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 204, 0, 0.08);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 50px;
+            color: var(--gold);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            animation: pulseGlow 3s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 10px rgba(255, 204, 0, 0.05); }
+            100% { box-shadow: 0 0 20px rgba(255, 204, 0, 0.15); }
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            font-weight: 400;
+        }
+
+        .hero-ctas {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--gold-gradient);
+            color: #000;
+            border: none;
+            padding: 18px 36px;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-weight: 800;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: var(--gold-glow);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--gold-glow-strong);
+            filter: brightness(1.1);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 18px 36px;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* How It Works Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .section-title h2 span {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .how-it-works {
+            padding: 80px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .step-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 40px 30px;
+            border-radius: 12px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            background: var(--bg-card-hover);
+            box-shadow: var(--gold-glow);
+            border-color: rgba(255, 204, 0, 0.35);
+        }
+
+        .step-number {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            opacity: 0.25;
+            line-height: 1;
+        }
+
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 204, 0, 0.08);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 24px;
+        }
+
+        .step-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .step-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #15151b 50%, var(--bg-dark) 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .pricing-card.popular {
+            background: linear-gradient(180deg, #1d1d2b 0%, #171721 100%);
+            border-color: var(--gold);
+            transform: scale(1.03);
+            box-shadow: 0 10px 30px rgba(255, 204, 0, 0.1);
+        }
+
+        .pricing-card.selected {
+            border-color: #ffd700;
+            box-shadow: var(--gold-glow-strong);
+        }
+
+        .popular-badge {
+            background: var(--gold-gradient);
+            color: #000;
+            font-weight: 800;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+            white-space: nowrap;
+        }
+
+        .pricing-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .pricing-header h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .pricing-header p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            min-height: 40px;
+        }
+
+        .price-tag {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin: 15px 0;
+            font-family: var(--font-heading);
+        }
+
+        .price-tag span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            font-family: var(--font-body);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 35px;
+            flex-grow: 1;
+        }
+
+        .pricing-features li {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pricing-features li i {
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
+
+        .btn-pricing {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 14px 24px;
+            border-radius: 8px;
+            width: 100%;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card.popular .btn-pricing {
+            background: var(--gold-gradient);
+            color: #000;
+            border: none;
+        }
+
+        .btn-pricing:hover {
+            transform: translateY(-2px);
+            background: var(--gold-gradient);
+            color: #000;
+            border-color: transparent;
+            box-shadow: var(--gold-glow);
+        }
+
+        /* Configurator & Live Preview Section */
+        .creator {
+            padding: 100px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .creator-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 50px;
+            align-items: flex-start;
+        }
+
+        .creator-form-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        }
+
+        .creator-form-panel h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .creator-form-panel p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px 18px;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.15);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Custom Package Select inside Form */
+        .package-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .package-option {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(255, 254, 0, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .package-option input {
+            display: none;
+        }
+
+        .package-option label {
+            cursor: pointer;
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--text-main);
+        }
+
+        .package-option span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: block;
+        }
+
+        .package-option.active {
+            border-color: var(--gold);
+            background: rgba(255, 204, 0, 0.05);
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.1);
+        }
+
+        .btn-giant-cta {
+            background: var(--gold-gradient);
+            color: #000;
+            border: none;
+            width: 100%;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-weight: 900;
+            font-size: 1.15rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            box-shadow: var(--gold-glow);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-giant-cta:hover {
+            transform: scale(1.02);
+            box-shadow: var(--gold-glow-strong);
+            filter: brightness(1.1);
+        }
+
+        /* Certificate Mockup Preview */
+        .preview-sticky {
+            position: sticky;
+            top: 110px;
+            min-width: 0;
+        }
+
+        .certificate-wrapper {
+            width: 100%;
+            max-width: 520px;
+            min-width: 0;
+            background: radial-gradient(circle, #fcfaf2 0%, #f4eee1 100%);
+            border: 15px double #b8860b;
+            outline: 3px solid #d4af37;
+            outline-offset: -10px;
+            border-radius: 4px;
+            padding: 40px 30px;
+            color: #1a1a1a;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 25px rgba(255, 204, 0, 0.1);
+            text-align: center;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+
+        .cert-header {
+            font-family: var(--font-heading);
+            border-bottom: 2px solid #8b6508;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .cert-header h4 {
+            font-size: 0.95rem;
+            letter-spacing: 3px;
+            font-weight: 800;
+            color: #8b6508;
+            margin-bottom: 5px;
+        }
+
+        .cert-header h3 {
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+        }
+
+        .cert-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 15px;
+            padding: 0 10px;
+            min-width: 0;
+        }
+
+        .cert-text-small {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+        }
+
+        .cert-name-reason {
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 2.1rem;
+            color: #8b1414; /* Luxury crimson */
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+            word-wrap: break-word;
+            padding: 5px 0;
+            border-bottom: 1px dashed rgba(139, 20, 20, 0.3);
+            margin: 0 auto;
+            max-width: 90%;
+            min-height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cert-name-wrong {
+            font-family: var(--font-body);
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #333;
+            min-height: 24px;
+            text-decoration: underline;
+            text-decoration-color: #8b6508;
+        }
+
+        .cert-subject {
+            font-style: italic;
+            font-weight: 700;
+            font-size: 1.15rem;
+            line-height: 1.35;
+            color: #222;
+            padding: 5px 15px;
+            background: rgba(139, 101, 8, 0.05);
+            border-radius: 4px;
+            border: 1px dotted rgba(139, 101, 8, 0.2);
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            box-sizing: border-box;
+            margin: 0 auto;
+            word-wrap: anywhere;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            white-space: normal;
+            min-height: 30px;
+        }
+
+        .cert-legal-text {
+            font-size: 0.75rem;
+            color: #555;
+            line-height: 1.5;
+            max-width: 90%;
+            margin: 10px auto 0 auto;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            padding-top: 10px;
+        }
+
+        .cert-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 35px;
+            padding: 0 15px;
+            position: relative;
+            z-index: 6;
+        }
+
+        .cert-signature {
+            text-align: left;
+            width: 110px;
+        }
+
+        .cert-sig-line {
+            border-bottom: 1px solid #777;
+            margin-bottom: 4px;
+            height: 35px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .cert-sig-text {
+            font-family: var(--font-signature);
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            line-height: 1;
+        }
+
+        .cert-signature label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #777;
+            display: block;
+        }
+
+        /* Wax Seal Styling */
+        .seal-container {
+            position: absolute;
+            bottom: 10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 80px;
+            z-index: 5;
+        }
+
+        .ribbons {
+            position: absolute;
+            top: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 50px;
+            z-index: 1;
+        }
+
+        .ribbon-left, .ribbon-right {
+            position: absolute;
+            width: 12px;
+            height: 45px;
+            background: #a81c1c;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
+        }
+
+        .ribbon-left {
+            transform: rotate(14deg);
+            left: 4px;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 85%, 0% 100%);
+        }
+
+        .ribbon-right {
+            transform: rotate(-14deg);
+            right: 4px;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 85%, 0% 100%);
+            background: #8b1414;
+        }
+
+        .wax-seal {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .wax-seal:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        /* Active Badge Overlay in Preview */
+        .preview-edition-badge {
+            background: #111;
+            color: var(--gold);
+            font-family: var(--font-body);
+            font-weight: 800;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 4px;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            border: 1px solid var(--gold-secondary);
+        }
+
+        /* FAQ / Informational Section */
+        .faq {
+            padding: 80px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .faq-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .faq-item h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .faq-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #0b0b0e;
+            border-top: 1px solid var(--border-color);
+            padding: 60px 0 30px 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-disclaimer {
+            font-size: 0.8rem;
+            color: #555566;
+            max-width: 650px;
+            margin: 20px auto 30px auto;
+            line-height: 1.5;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: #444455;
+            border-top: 1px solid rgba(255,255,255,0.03);
+            padding-top: 20px;
+        }
+
+        /* Modal / Checkout Popup */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(6, 6, 8, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: #15151e;
+            border: 2px solid var(--gold);
+            box-shadow: var(--gold-glow-strong);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 520px;
+            padding: 40px;
+            position: relative;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+        }
+
+        .modal-overlay.open .modal-card {
+            transform: translateY(0) scale(1);
+        }
+
+        .btn-close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .btn-close-modal:hover {
+            color: #fff;
+        }
+
+        .modal-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 204, 0, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--gold);
+            margin: 0 auto 20px auto;
+        }
+
+        .modal h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .modal-p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .modal-summary {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .summary-row:last-child {
+            margin-bottom: 0;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 8px;
+            font-weight: 700;
+        }
+
+        .summary-label {
+            color: var(--text-muted);
+        }
+
+        .summary-value {
+            color: #fff;
+        }
+
+        .summary-value.gold-val {
+            color: var(--gold);
+        }
+
+        /* Payment Buttons */
+        .payment-options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .payment-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Stripe Styling */
+        .stripe-btn {
+            background: #635bff;
+            color: #ffffff;
+            border: none;
+        }
+
+        .stripe-btn:hover {
+            background: #7a73ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(99, 91, 255, 0.4);
+        }
+
+        /* PayPal Styling */
+        .paypal-btn {
+            background: #ffd140;
+            color: #003087;
+            border: none;
+        }
+
+        .paypal-btn:hover {
+            background: #ffe073;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 209, 64, 0.4);
+        }
+
+        .payment-security-text {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.75rem;
+            color: #555566;
+        }
+
+        .payment-security-text i {
+            color: var(--gold);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 992px) {
+            .creator-grid {
+                grid-template-columns: 1fr;
+            }
+            .pricing-grid, .steps-grid, .faq-grid {
+                grid-template-columns: 1fr;
+            }
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .preview-sticky {
+                position: relative;
+                top: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .creator-form-panel {
+                padding: 24px;
+            }
+            .certificate-wrapper {
+                padding: 30px 15px;
+            }
+            .cert-name-reason {
+                font-size: 1.6rem;
+            }
+            .package-selector {
+                grid-template-columns: 1fr;
+            }
+            .modal-card {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SVG Definitions per Gradient e Filtri -->
+    <svg style="width:0; height:0; position:absolute;">
+        <defs>
+            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffd700" />
+                <stop offset="50%" stop-color="#fff2b3" />
+                <stop offset="100%" stop-color="#b8860b" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- Header / Nav -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-scroll" style="color:#ffcc00"></i>
+                <span>DebateOver</span> <div class="logo-badge">Ufficiale</div>
+            </a>
+            <div class="nav-links">
+                <a href="#come-funziona" class="nav-link">Come Funziona</a>
+                <a href="#prezzi" class="nav-link">Pacchetti</a>
+                <a href="#personalizza" class="btn-nav">Reclama Ragione</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge-top">
+                <i class="fa-solid fa-gavel"></i> Certificati Legali Anti-Litigio
+            </div>
+            <h1>Il modo supremo di <span>Avere Ragione</span></h1>
+            <p>La persona con cui hai litigato non ammette la sconfitta? Ufficializza la tua supremazia intellettuale con un certificato d'oro formale in PDF o Pergamena Reale.</p>
+            <div class="hero-ctas">
+                <a href="#personalizza" class="btn-primary">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Crea Certificato
+                </a>
+                <a href="#come-funziona" class="btn-secondary">Scopri Come Funziona</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Come Funziona Section -->
+    <section class="how-it-works" id="come-funziona">
+        <div class="container">
+            <div class="section-title">
+                <h2>Come Funziona il <span>Metodo Scientifico</span></h2>
+                <p>3 passi infallibili per umiliare formalmente chiunque osi mettere in dubbio la tua saggezza.</p>
+            </div>
+            <div class="steps-grid">
+                <!-- Step 1 -->
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <div class="step-icon">
+                        <i class="fa-solid fa-comments-lash"></i>
+                        <i class="fa-solid fa-fire"></i>
+                    </div>
+                    <h3>1. Il Grande Litigio</h3>
+                    <p>Ti scontri duramente su una futilità cruciale (la cottura della carbonara, la strada più corta, o un fatto storico non verificato).</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <div class="step-icon">
+                        <i class="fa-solid fa-file-signature"></i>
+                    </div>
+                    <h3>2. Ordina la Verità</h3>
+                    <p>Inserisci il tuo nome, il nome dell'ostinato avversario e la questione discussa. Scegli il livello di solennità del pacchetto.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <div class="step-icon">
+                        <i class="fa-solid fa-ribbon"></i>
+                    </div>
+                    <h3>3. Trionfo Pubblico</h3>
+                    <p>Invia il PDF alle 3 del mattino o appendi la Pergamena con ceralacca in soggiorno per schiacciare il suo orgoglio per sempre.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tariffe / Prezzi Section -->
+    <section class="pricing" id="prezzi">
+        <div class="container">
+            <div class="section-title">
+                <h2>I Nostri <span>Pacchetti di Supremazia</span></h2>
+                <p>Dal PDF salvavita istantaneo alla pergamena solenne ineluttabile, scegli l'intensità che preferisci per riscattare la tua supremazia.</p>
+            </div>
+            <div class="pricing-grid">
+                <!-- Card 1: Digitale Fast -->
+                <div class="pricing-card" id="card-digital">
+                    <div class="pricing-header">
+                        <h3>Ragione liquida (PDF)</h3>
+                        <p>Per i dibattiti notturni istantanei su WhatsApp e Telegram.</p>
+                        <div class="price-tag">€4,99<span>/ una tantum</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> PDF HD via Email in 5 minuti</li>
+                        <li><i class="fa-solid fa-check"></i> Sigillo Digitale d'Oro Imperiale</li>
+                        <li><i class="fa-solid fa-check"></i> Proroga di auto-elogio a vita</li>
+                        <li><i class="fa-solid fa-check"></i> Valido nei gruppi di famiglia</li>
+                    </ul>
+                    <button class="btn-pricing" onclick="selectPackage('digital')">Seleziona PDF</button>
+                </div>
+
+                <!-- Card 2: Pergamena di Pace (Popular) -->
+                <div class="pricing-card popular" id="card-scroll">
+                    <div class="popular-badge">Consigliato per L'Ego</div>
+                    <div class="pricing-header">
+                        <h3>Editto di Resa Incondizionata</h3>
+                        <p>Una legge imperiale edificata per far sapere a tutti quanto hai ragione.</p>
+                        <div class="price-tag">€12,99<span>/ spedito</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Stampa su carta pergamena A4</li>
+                        <li><i class="fa-solid fa-check"></i> Sigillo in vera ceralacca sintetica</li>
+                        <li><i class="fa-solid fa-check"></i> Spedizione tracciata inclusa</li>
+                        <li><i class="fa-solid fa-check"></i> Firma in inchiostro d'oro</li>
+                    </ul>
+                    <button class="btn-pricing" onclick="selectPackage('scroll')">Seleziona Pergamena</button>
+                </div>
+
+                <!-- Card 3: Ego Boost Premium -->
+                <div class="pricing-card" id="card-premium">
+                    <div class="pricing-header">
+                        <h3>L’Undicesimo Comandamento</h3>
+                        <p>"La ragione era tua fin dall'inizio, poiché ti è stata promessa dal divino".</p>
+                        <div class="price-tag">€24,99<span>/ completo</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Certificato + Elegante Cornice Nera</li>
+                        <li><i class="fa-solid fa-check"></i> Spedizione Express 24/48 ore</li>
+                        <li><i class="fa-solid fa-check"></i> Lettera di scuse formale pre-compilata</li>
+                        <li><i class="fa-solid fa-check"></i> Supporto psicologico (satirico)</li>
+                    </ul>
+                    <button class="btn-pricing" onclick="selectPackage('premium')">Seleziona Cornice</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Configurator & Live Preview Section -->
+    <section class="creator" id="personalizza">
+        <div class="container">
+            <div class="section-title">
+                <h2>Configura il Tuo <span>Trionfo</span></h2>
+                <p>Compila i dettagli del grande litigio e guarda in tempo reale l'aspetto del tuo certificato ufficiale.</p>
+            </div>
+            <div class="creator-grid">
+                <!-- Left Column: Form -->
+                <div class="creator-form-panel">
+                    <h3>Tribunale della Ragione</h3>
+                    <p>Tutti i campi sono richiesti per autenticare il verdetto.</p>
+                    
+                    <form id="configurator-form">
+                        <div class="form-group">
+                            <label for="input-ragione">Chi ha palesemente ragione (Tu):</label>
+                            <input type="text" id="input-ragione" maxlength="40" placeholder="Es. Marco il Magnifico" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="input-torto">Chi ha miseramente torto (L'avversario):</label>
+                            <input type="text" id="input-torto" maxlength="40" placeholder="Es. Francesca la Cocciuta" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="input-oggetto">L'oggetto preciso della disputa:</label>
+                            <input type="text" id="input-oggetto" maxlength="120" placeholder="Es. La panna nella carbonara è un reato" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="input-email">Email per la notifica:</label>
+                            <input type="email" id="input-email" maxlength="120" placeholder="Es. marco@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Scegli il pacchetto di riscatto:</label>
+                            <div class="package-selector">
+                                <div class="package-option active" id="opt-digital" onclick="selectPackageInsideForm('digital')">
+                                    <input type="radio" id="rad-digital" name="package-select" value="digital" checked>
+                                    <label for="rad-digital">Ragione liquida (PDF)</label>
+                                    <span>€4,99</span>
+                                </div>
+                                <div class="package-option" id="opt-scroll" onclick="selectPackageInsideForm('scroll')">
+                                    <input type="radio" id="rad-scroll" name="package-select" value="scroll">
+                                    <label for="rad-scroll">Editto di Resa Incondizionata</label>
+                                    <span>€12,99</span>
+                                </div>
+                                <div class="package-option" id="opt-premium" onclick="selectPackageInsideForm('premium')">
+                                    <input type="radio" id="rad-premium" name="package-select" value="premium">
+                                    <label for="rad-premium">L'Undicesimo Comandamento</label>
+                                    <span>€24,99</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-giant-cta">
+                            <i class="fa-solid fa-signature"></i> Genera e Rivendica la Ragione
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right Column: Live Mockup -->
+                <div class="preview-sticky">
+                    <!-- Little floating guide -->
+                    <div style="text-align: center; margin-bottom: 12px; font-size: 0.85rem; color: var(--gold); text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">
+                        <i class="fa-solid fa-eye"></i> Anteprima Live Certificato
+                    </div>
+                    
+                    <div class="certificate-wrapper" id="certificate-preview" style="opacity:0; transition: opacity 0.5s ease-in-out;">
+                        <div class="preview-edition-badge" id="preview-badge">Ragione liquida</div>
+                        
+                        <div class="cert-header">
+                            <h4>Certificato Ufficiale</h4>
+                            <h3>Di Ragione Assoluta</h3>
+                        </div>
+                        
+                        <div class="cert-body">
+                            <span class="cert-text-small">Si attesta solennemente che</span>
+                            <div class="cert-name-reason" id="preview-ragione">IL GENIO</div>
+                            <span class="cert-text-small">ha pienamente, indiscutibilmente e indubbiamente</span>
+                            <div style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: #8b6508; letter-spacing: 2px;">RAGIONE</div>
+                            <span class="cert-text-small">nei confronti dell'infantile</span>
+                            <div class="cert-name-wrong" id="preview-torto">IL COCCIUTO</div>
+                            <span class="cert-text-small">riguardo alla cruciale questione:</span>
+                            <div class="cert-subject" id="preview-oggetto">"La cottura della carbonara"</div>
+                        </div>
+
+                        <div class="cert-legal-text">
+                            La presente certificazione, emessa in data odierna, sancisce il diritto inalienabile e permanente del detentore di rinfacciare l'accaduto a tempo indeterminato, bloccando sul nascere ogni ulteriore dibattito.
+                        </div>
+
+                        <div class="cert-footer">
+                            <div class="cert-signature">
+                                <div class="cert-sig-line">
+                                    <span class="cert-sig-text" id="sig-right" style="font-size: 1.5rem; font-family: 'Great Vibes'">[Ego]</span>
+                                </div>
+                                <label>Giudice dell'Ego</label>
+                            </div>
+                            
+                            <div class="cert-signature" style="text-align: right;">
+                                <div class="cert-sig-line">
+                                    <span class="cert-sig-text" style="font-family: 'Great Vibes', cursive; font-size: 1.5rem; line-height: 1;">LaRagione</span>
+                                </div>
+                                <label>Corte delle Verità</label>
+                            </div>
+                        </div>
+
+                        <!-- Wax Seal Component -->
+                        <div class="seal-container">
+                            <div class="ribbons">
+                                <div class="ribbon-left"></div>
+                                <div class="ribbon-right"></div>
+                            </div>
+                            <svg class="wax-seal" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" fill="url(#goldGradient)" filter="drop-shadow(0px 4px 6px rgba(0,0,0,0.35))" />
+                                <circle cx="50" cy="50" r="38" fill="none" stroke="#8b6508" stroke-width="1.5" stroke-dasharray="4 2" />
+                                <g transform="translate(50, 48) scale(0.65)">
+                                    <path d="M-20,15 L-25,-10 L-10,0 L0,-20 L10,0 L25,-10 L20,15 Z" fill="#8b6508" />
+                                    <rect x="-20" y="15" width="40" height="5" fill="#8b6508" rx="2" />
+                                </g>
+                                <text x="50" y="80" font-family="'Cinzel', serif" font-size="7" font-weight="bold" fill="#8b6508" text-anchor="middle">RAGIONE</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Risposte alle Domande più <span>Ostinate</span></h2>
+                <p>Hai ancora dei dubbi? Abbiamo risposte scientifiche pronte per te.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>Ha davvero valore legale?</h4>
+                    <p>No, purtroppo la giurisprudenza ordinaria non gestisce ancora l'ego delle persone cocciute. Tuttavia, ha un impatto psicologico formidabile. Sventolare una pergamena ufficiale d'oro zittirà l'avversario nel 99% dei casi reali.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Cosa succede se l'avversario rifiuta il verdetto?</h4>
+                    <p>Il certificato include un sigillo reale. Rifiutare il verdetto equivale a dichiarare guerra formale alla logica stessa. Consigliamo di incorniciarlo e appenderlo proprio di fronte alla sua sedia preferita nel salotto.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Posso ordinare per litigi vecchi di anni?</h4>
+                    <p>Assolutamente sì. Abbiamo archiviato certificati per dispute nate nel 2012 riguardanti canzoni dei festival musicali o la corretta strada da percorrere durante una gita fuori porta. Non è mai troppo tardi per avere ragione.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>La spedizione è discreta?</h4>
+                    <p>Il tubo o la confezione di cartone sono sobri all'esterno, ma all'interno l'esplosione di gloria dorata è immediata. L'effetto sorpresa nel consegnare di persona un documento solenne firmato è impagabile.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <i class="fa-solid fa-scroll" style="color:#ffcc00; margin-right: 8px;"></i><span>Debate Over</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">L'autorità suprema nel dare ragione a chi ha effettivamente, palesemente ragione.</p>
+            <div class="footer-disclaimer">
+                <strong>Disclaimer Satirico:</strong> "Debate Over" è un servizio ironico e umoristico. I certificati generati non costituiscono pareri legali o diplomi con valore legale e sono intesi solo per divertimento, goliardia e risoluzione amichevole (ma trionfale) delle liti quotidiane.
+            </div>
+            <div class="footer-links">
+                <a href="#">Home</a>
+                <a href="#come-funziona">Come Funziona</a>
+                <a href="#prezzi">Pacchetti</a>
+                <a href="#personalizza">Inizia Ora</a>
+            </div>
+            <div class="footer-copyright">
+                &copy; 2026 Debate Over. Tutti i diritti (e le ragioni) riservati. Creato con orgoglio e goliardia.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Checkout Modal / Popup -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal-card">
+            <button class="btn-close-modal" onclick="closeModal()">&times;</button>
+            <div class="modal-icon">
+                <i class="fa-solid fa-crown"></i>
+            </div>
+            <h3>Riscatta la Tua Ragione</h3>
+            <p class="modal-p">Stai per ufficializzare il verdetto definitivo. Procedi con il pagamento sicuro per bloccare la pergamena ed evitare che l'avversario continui ad avere un falso senso di sicurezza.</p>
+            
+            <div class="modal-summary">
+                <div class="summary-row">
+                    <span class="summary-label">Certificato per:</span>
+                    <span class="summary-value" id="modal-val-ragione">...</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Avversario sconfitto:</span>
+                    <span class="summary-value" id="modal-val-torto">...</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Pacchetto Scelto:</span>
+                    <span class="summary-value" id="modal-val-package">...</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Importo Totale:</span>
+                    <span class="summary-value gold-val" id="modal-val-price">...</span>
+                </div>
+            </div>
+
+            <!-- PAYMENT OPTIONS WITH PLACEHOLDERS -->
+            <div class="payment-options-container">
+                <!-- 
+                     Sostituisci "YOUR_STRIPE_PAYMENT_LINK_PLACEHOLDER" con il tuo link di Stripe 
+                     (es: Stripe Payment Link creato dalla tua dashboard Stripe)
+                -->
+                <!-- Stripe payment option temporarily commented out until Stripe profile is available
+                <a href="YOUR_STRIPE_PAYMENT_LINK_PLACEHOLDER" class="payment-btn stripe-btn" id="stripe-link" target="_blank" onclick="alert('Integrazione Stripe di prova! Sostituisci il link nel codice HTML con la tua URL di checkout effettiva.')">
+                    <i class="fa-brands fa-stripe"></i> Paga con Carta o Stripe
+                </a>
+                -->
+
+                <!-- Form di pagamento PayPal ufficiale integrato con stile lussuoso -->
+                <form action="#" method="post" target="_blank" id="paypal-payment-form" style="width: 100%;">
+                    <input type="hidden" name="cmd" value="_s-xclick" />
+                    <input type="hidden" name="hosted_button_id" value="" />
+                    
+                    <!-- Nascondiamo la tabella e il select originale, controllati in automatico via JS per preservare lo stile della pagina -->
+                    <table style="display: none;">
+                        <tr>
+                            <td>
+                                <input type="hidden" name="on0" value="CERTIFICATO DI RAGIONE"/>
+                                CERTIFICATO DI RAGIONE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="os0" id="paypal-package-select">
+                                    <option value="Digitale Fast ">Digitale Fast </option>
+                                    <option value="Pergamena di Pace">Pergamena di Pace</option>
+                                    <option value="Ego Boost Premium">Ego Boost Premium</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <input type="hidden" name="currency_code" value="EUR" />
+                    
+                    <!-- Pulsante dorato/giallo integrato perfettamente nel design del sito -->
+                    <button type="submit" class="payment-btn paypal-btn" style="border: none; width: 100%; cursor: pointer; font-family: inherit;">
+                        <i class="fa-brands fa-paypal"></i> Paga Ora con PayPal
+                    </button>
+                </form>
+            </div>
+
+            <span class="payment-security-text">
+                <i class="fa-solid fa-shield-halved"></i> Transazione crittografata e protetta da standard bancari.
+            </span>
+        </div>
+    </div>
+
+    <!-- JavaScript per l'interattività, live preview e gestione carrello -->
+    <script>
+        async function loadPaymentConfig() {
+            try {
+                const response = await fetch('/api/payment-config');
+                if (!response.ok) {
+                    throw new Error('Payment config unavailable');
+                }
+                const config = await response.json();
+                const paypalForm = document.getElementById('paypal-payment-form');
+                if (paypalForm) {
+                    paypalForm.action = config.paypalAction;
+                    const hostedButtonInput = paypalForm.querySelector('input[name="hosted_button_id"]');
+                    if (hostedButtonInput) {
+                        hostedButtonInput.value = config.hostedButtonId;
+                    }
+                }
+            } catch (error) {
+                console.warn('Unable to load payment config:', error);
+            }
+        }
+
+        // Inizializza l'interfaccia all'avvio per garantire la coerenza
+        document.addEventListener('DOMContentLoaded', () => {
+            updatePackageSelectionUI(state.selectedPackage);
+            document.getElementById('certificate-preview').style.opacity = 1;
+        });
+        loadPaymentConfig();
+
+        // Stato dell'applicazione
+        const state = {
+            selectedPackage: 'digital',
+            packages: {
+                digital: {
+                    name: 'Ragione liquida',
+                    price: '€4,99',
+                    desc: 'Edizione Digitale PDF (HD via Email)'
+                },
+                scroll: {
+                    name: 'Editto di Resa',
+                    price: '€12,99',
+                    desc: 'Spedizione Cartacea su Pergamena pregiata'
+                },
+                premium: {
+                    name: 'L’Undicesimo Comandamento',
+                    price: '€24,99',
+                    desc: 'Certificato in Cornice di Legno + Spedizione 24h'
+                }
+            }
+        };
+
+        // Riferimenti DOM del Form
+        const inputRagione = document.getElementById('input-ragione');
+        const inputTorto = document.getElementById('input-torto');
+        const inputOggetto = document.getElementById('input-oggetto');
+        const inputEmail = document.getElementById('input-email');
+
+        // Riferimenti DOM del Certificato Preview
+        const previewRagione = document.getElementById('preview-ragione');
+        const previewTorto = document.getElementById('preview-torto');
+        const previewOggetto = document.getElementById('preview-oggetto');
+        const previewBadge = document.getElementById('preview-badge');
+        const sigRight = document.getElementById('sig-right');
+
+        // Real-time Event Listeners per il certificato live
+        inputRagione.addEventListener('input', function() {
+            const val = this.value.trim();
+            previewRagione.textContent = val ? val.toUpperCase() : "IL GENIO";
+            sigRight.textContent = val ? val : "Ego Supremo";
+        });
+
+        inputTorto.addEventListener('input', function() {
+            const val = this.value.trim();
+            previewTorto.textContent = val ? val.toUpperCase() : "IL COCCIUTO";
+        });
+
+        inputOggetto.addEventListener('input', function() {
+            const val = this.value.trim();
+            previewOggetto.textContent = val ? `"${val}"` : `"La cottura della carbonara"`;
+            adjustSubjectFontSize();
+        });
+
+        function adjustSubjectFontSize() {
+            const maxFont = 1.15;
+            const minFont = 0.7;
+            const step = 0.03;
+            const maxLines = 2;
+            let fontSize = maxFont;
+
+            previewOggetto.style.lineHeight = '1.35';
+            previewOggetto.style.whiteSpace = 'normal';
+            previewOggetto.style.wordWrap = 'anywhere';
+            previewOggetto.style.overflowWrap = 'anywhere';
+            previewOggetto.style.wordBreak = 'break-word';
+            previewOggetto.style.fontSize = `${fontSize}rem`;
+
+            const computedLineHeight = parseFloat(getComputedStyle(previewOggetto).lineHeight) || 1.35 * fontSize;
+            const maxHeight = computedLineHeight * maxLines + 2;
+
+            while (fontSize > minFont && previewOggetto.scrollHeight > maxHeight) {
+                fontSize -= step;
+                previewOggetto.style.fontSize = `${fontSize}rem`;
+            }
+        }
+
+        adjustSubjectFontSize();
+
+        // Funzione per selezionare il pacchetto dalle Card Prezzi
+        function selectPackage(packageKey) {
+            state.selectedPackage = packageKey;
+            
+            // Aggiorna l'interfaccia nel form
+            updatePackageSelectionUI(packageKey);
+            
+            // Scendi dolcemente fino alla sezione personalizzazione
+            document.getElementById('personalizza').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Funzione per selezionare il pacchetto cliccando dentro il form
+        function selectPackageInsideForm(packageKey) {
+            state.selectedPackage = packageKey;
+            updatePackageSelectionUI(packageKey);
+        }
+
+        // Sincronizza lo stato grafico delle opzioni pacchetto
+        function updatePackageSelectionUI(packageKey) {
+            // Rimuovi classe active da tutte le card del prezzo
+            document.querySelectorAll('.pricing-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            // Aggiungi bordo/shadow alla card del listino prezzi corrispondente
+            const listCard = document.getElementById(`card-${packageKey}`);
+            if(listCard) listCard.classList.add('selected');
+
+            // Gestione dei bottoni di opzione nel Form
+            document.querySelectorAll('.package-option').forEach(opt => {
+                opt.classList.remove('active');
+            });
+            document.getElementById(`opt-${packageKey}`).classList.add('active');
+            document.getElementById(`rad-${packageKey}`).checked = true;
+
+            // Aggiorna il badge del tipo di edizione sul certificato live
+            const selectedInfo = state.packages[packageKey];
+            previewBadge.textContent = selectedInfo.name;
+        }
+
+        async function submitOrderToBackend(orderData) {
+            try {
+                const response = await fetch('/api/order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(orderData)
+                });
+
+                const result = await response.json().catch(() => ({}));
+                if (!response.ok || !result.ok) {
+                    throw new Error(result.error || 'Ordine non inviato');
+                }
+
+                console.log('Ordine inviato correttamente:', result);
+                return result;
+            } catch (error) {
+                console.error('Errore nell\'invio dell\'ordine:', error);
+                return { ok: false, error: error.message };
+            }
+        }
+
+        // Gestione del Form Submit
+        document.getElementById('configurator-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Sincronizza i dati finali del modulo all'interno del Popup/Modal
+            const nomeRagione = inputRagione.value.trim();
+            const nomeTorto = inputTorto.value.trim();
+            const oggettoDisputa = inputOggetto.value.trim();
+            const pacchettoDettagli = state.packages[state.selectedPackage];
+
+            document.getElementById('modal-val-ragione').textContent = nomeRagione;
+            document.getElementById('modal-val-torto').textContent = nomeTorto;
+            document.getElementById('modal-val-package').textContent = pacchettoDettagli.desc;
+            document.getElementById('modal-val-price').textContent = pacchettoDettagli.price;
+
+            // Sincronizza la selezione sul form ufficiale di PayPal
+            const paypalSelect = document.getElementById('paypal-package-select');
+            if (paypalSelect) {
+                if (state.selectedPackage === 'digital') {
+                    paypalSelect.value = "Digitale Fast ";
+                } else if (state.selectedPackage === 'scroll') {
+                    paypalSelect.value = "Pergamena di Pace";
+                } else if (state.selectedPackage === 'premium') {
+                    paypalSelect.value = "Ego Boost Premium";
+                }
+            }
+
+            const email = inputEmail?.value.trim() || '';
+
+            await submitOrderToBackend({
+                ragione: nomeRagione,
+                torto: nomeTorto,
+                oggetto: oggettoDisputa,
+                email,
+                package: state.selectedPackage,
+                packageName: pacchettoDettagli.name,
+                price: pacchettoDettagli.price,
+                description: pacchettoDettagli.desc
+            });
+
+            // Apertura Modale
+            openModal();
+        });
+
+        // Funzioni di utilità per aprire e chiudere la modale di acquisto
+        function openModal() {
+            document.getElementById('checkout-modal').classList.add('open');
+        }
+
+        function closeModal() {
+            document.getElementById('checkout-modal').classList.remove('open');
+        }
+
+        // Chiude la modale cliccando fuori dal box del modal
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('checkout-modal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

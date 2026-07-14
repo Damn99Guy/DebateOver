@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="16" fill="#111116"/>
+  <circle cx="32" cy="32" r="24" fill="none" stroke="#ffcc00" stroke-width="2" opacity="0.9"/>
+  <path d="M20 20c3-4 7-6 12-6 5 0 9 2 12 6-3 1-6 2-9 2-4 0-7-1-10-2-1 0-2 0-3 0z" fill="#ffcc00" opacity="0.9"/>
+  <path d="M24 22c0-3 2-5 8-5s8 2 8 5c0 2-2 4-4 5h-8c-2-1-4-3-4-5z" fill="#171721"/>
+  <path d="M24 24c2-2 4-3 8-3 4 0 6 1 8 3" fill="none" stroke="#d4af37" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M26 31h12" stroke="#ffcc00" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M28 35h8" stroke="#d4af37" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M22 43c3-2 6-3 10-3s7 1 10 3" fill="none" stroke="#ffcc00" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+  <text x="32" y="49" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-size="10" font-weight="700" letter-spacing="1.2" fill="#ffcc00">DB</text>
+</svg>

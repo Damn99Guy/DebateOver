@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Debate Over</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0b0f;
+      --panel: #14141b;
+      --border: rgba(255,204,0,0.14);
+      --gold: #ffcc00;
+      --text: #f8f4e3;
+      --muted: #a49b74;
+      --card-elev: rgba(0,0,0,0.45);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: linear-gradient(135deg, #060608, #111118);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 24px;
+    }
+    .wrap { width: min(100%, 980px); margin: 0 auto; padding-top: 18px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: 18px; padding: 22px; box-shadow: 0 8px 30px var(--card-elev); width: 100%; }
+    h1 { margin: 0 0 8px 0; color: var(--gold); text-align: left; font-size: 1.3rem; }
+    .login { max-width: 420px; margin: 0 auto; }
+    .intro { text-align: center; color: var(--muted); margin-bottom: 12px; }
+    label { display: block; margin-bottom: 6px; color: var(--muted); font-size: 0.95rem; }
+    input[type="text"], input[type="password"], input[type="search"] { width: 100%; padding: 11px 12px; margin-bottom: 12px; border-radius: 10px; border: 1px solid var(--border); background: #0e0e13; color: var(--text); }
+    button { background: var(--gold); color: #111; border: none; padding: 10px 14px; border-radius: 10px; cursor: pointer; font-weight: 700; }
+    .hidden { display: none; }
+
+    /* Dashboard header */
+    .dashboard-header { display: flex; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .badge { background: rgba(255,204,0,0.12); color: var(--gold); padding: 6px 10px; border-radius: 999px; font-weight: 700; border: 1px solid rgba(255,204,0,0.08); }
+    .controls { display: flex; gap: 8px; align-items: center; }
+    .controls input { width: 340px; max-width: 50vw; }
+    .controls button { padding: 8px 12px; }
+
+    /* Card grid like Angular cards */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-top: 8px; }
+    .order-card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06)); border: 1px solid rgba(255,204,0,0.06); border-radius: 12px; padding: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.35); display: flex; flex-direction: column; gap: 8px; }
+    .order-top { display:flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .order-title { font-weight: 700; font-size: 1rem; }
+    .order-sub { color: var(--muted); font-size: 0.9rem; }
+    .order-meta { color: var(--muted); font-size: 0.85rem; }
+    .order-body { font-size: 0.95rem; }
+    .order-actions { display:flex; gap:8px; margin-top:6px; }
+    .btn-flat { background: transparent; color: var(--gold); border: 1px solid rgba(255,204,0,0.06); padding:6px 8px; border-radius:8px; cursor:pointer; }
+
+    details pre { white-space: pre-wrap; word-break: break-word; background: rgba(0,0,0,0.12); padding:8px; border-radius:8px; color:var(--muted); }
+    .empty { color: var(--muted); text-align: center; padding: 20px 0; }
+    /* Table styles */
+    .table-container { width: 100%; overflow:auto; }
+    .status-banner { color: #111; background: #7bffb0; padding: 6px 12px; border-radius: 999px; font-size: 0.9rem; font-weight: 700; border: 1px solid rgba(123,255,176,0.25); }
+    .hidden { display: none; }
+    table.orders { width: 100%; border-collapse: collapse; margin-top: 6px; }
+    table.orders thead th { text-align: left; color: var(--muted); font-size: 0.9rem; padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    table.orders tbody td { padding: 10px 12px; border-bottom: 1px dashed rgba(255,255,255,0.02); vertical-align: middle; }
+    table.orders tbody tr.empty-row td { text-align: center; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div id="loginView" class="card login">
+      <h1>Admin Debate Over</h1>
+      <p class="intro">Accedi per vedere gli ordini ricevuti.</p>
+      <label>Username</label>
+      <input id="username" placeholder="Inserisci l'username configurato" />
+      <label>Password</label>
+      <input id="password" type="password" placeholder="Inserisci la password configurata" />
+      <button onclick="login()">Accedi</button>
+      <div id="loginError" class="error"></div>
+    </div>
+
+    <div id="ordersView" class="card hidden">
+      <div class="dashboard-header">
+        <div>
+          <h1>Ordini ricevuti</h1>
+          <div class="meta">Panoramica degli ordini recenti</div>
+        </div>
+        <div class="controls">
+          <input id="searchInput" type="search" placeholder="Cerca per nome, oggetto o email" oninput="renderFiltered()" />
+          <button id="logoutBtn" class="btn-flat" onclick="logout()">Logout</button>
+        </div>
+      </div>
+
+      <div id="stats" style="display:flex;gap:12px;align-items:center;margin-bottom:8px;flex-wrap:wrap;">
+        <div class="badge" id="totalBadge">0 ordini</div>
+        <div id="statusBanner" class="status-banner hidden">Ordini aggiornati</div>
+      </div>
+
+      <div class="table-container">
+        <table class="orders" aria-describedby="totalBadge">
+          <thead>
+            <tr>
+              <th style="width:48px">#</th>
+              <th style="width:160px">Data</th>
+              <th>Titolo</th>
+              <th>Oggetto</th>
+              <th>Pacchetto</th>
+              <th style="width:100px">Prezzo</th>
+              <th style="width:180px">Email</th>
+              <th style="width:100px">Azioni</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody">
+            <tr class="empty-row"><td colspan="8">Caricamento...</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="empty" class="empty hidden">Nessun ordine trovato</div>
+      <div id="adminError" class="error"></div>
+    </div>
+  </div>
+
+  <script>
+    let authHeader = '';
+    let ordersCache = [];
+
+    function setStatus(message, isError = false) {
+      const error = document.getElementById('loginError');
+      error.textContent = message;
+      error.style.color = isError ? '#ff7b7b' : '#7bffb0';
+    }
+
+    async function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      setStatus('');
+
+      try {
+        const response = await fetch('/api/admin-login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.ok) {
+          setStatus(result.error || 'Errore di accesso', true);
+          return;
+        }
+
+        authHeader = 'Basic ' + btoa(`${username}:${password}`);
+        document.getElementById('loginView').classList.add('hidden');
+        document.getElementById('ordersView').classList.remove('hidden');
+        await loadOrders();
+      } catch (error) {
+        setStatus('Il backend non risponde. Apri la pagina da Vercel o da un server locale.', true);
+      }
+    }
+
+    async function loadOrders() {
+      const tbody = document.getElementById('ordersTableBody');
+      if (tbody) tbody.innerHTML = '<tr class="empty-row"><td colspan="8">Caricamento...</td></tr>';
+
+      try {
+        const response = await fetch('/api/admin-orders', { headers: { Authorization: authHeader } });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.ok) {
+          document.getElementById('adminError').textContent = result.error || 'Non puoi vedere gli ordini.';
+          if (tbody) tbody.innerHTML = '<tr class="empty-row"><td colspan="8">Non puoi vedere gli ordini.</td></tr>';
+          return;
+        }
+
+        ordersCache = Array.isArray(result.orders) ? result.orders.slice().reverse() : [];
+        renderFiltered();
+        showStatus('Tabella aggiornata con gli ordini più recenti');
+      } catch (error) {
+        document.getElementById('adminError').textContent = 'Impossibile caricare gli ordini.';
+        if (tbody) tbody.innerHTML = '<tr class="empty-row"><td colspan="8">Impossibile caricare gli ordini.</td></tr>';
+      }
+    }
+
+    function renderFiltered() {
+      const q = (document.getElementById('searchInput')?.value || '').trim().toLowerCase();
+      
+      const totalBadge = document.getElementById('totalBadge');
+      const tbody = document.getElementById('ordersTableBody');
+
+      const filtered = ordersCache.filter(o => {
+        if (!q) return true;
+        const s = [o.ragione, o.torto, o.oggetto, o.subject, o.email, o.to].join(' ').toLowerCase();
+        return s.includes(q);
+      });
+
+      totalBadge.textContent = `${filtered.length} ordini`;
+      if (!tbody) return;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr class="empty-row"><td colspan="8">Nessun ordine trovato</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map((order, idx) => renderOrderRow(order, idx + 1)).join('');
+    }
+
+    function renderOrderRow(order, index) {
+      const time = order.timestamp ? new Date(order.timestamp).toLocaleString('it-IT') : '—';
+      const title = `${order.ragione || 'n/d'} vs ${order.torto || 'n/d'}`;
+      const subject = order.oggetto || order.subject || 'n/d';
+      const pkg = order.packageName || order.package || 'n/d';
+      const price = order.price || 'n/d';
+      const email = order.email || order.to || '';
+      const processed = order.processed ? true : false;
+      const procLabel = processed ? 'Annulla' : 'Processa';
+      const procAction = processed ? 'unmark_processed' : 'mark_processed';
+      const rowClass = processed ? 'style="opacity:0.7;"' : '';
+      const ident = order.id || order.timestamp || '';
+
+      return `
+        <tr ${rowClass}>
+          <td>#${index}</td>
+          <td>${time}</td>
+          <td>${escapeHtml(title)}${processed ? ' <span style="color:var(--gold);font-weight:700;margin-left:6px;">(processato)</span>' : ''}</td>
+          <td>${escapeHtml(subject)}</td>
+          <td>${escapeHtml(pkg)}</td>
+          <td>${escapeHtml(price)}</td>
+          <td>${escapeHtml(email)}</td>
+          <td style="display:flex;gap:6px;">
+            <button class="btn-flat" onclick="copyEmail('${encodeURIComponent(email)}')">Copia</button>
+            <button class="btn-flat" onclick="performOrderAction('${procAction}','${encodeURIComponent(ident)}')">${procLabel}</button>
+            <button class="btn-flat" onclick="performOrderAction('delete','${encodeURIComponent(ident)}')" style="color:#ff7b7b;border-color:rgba(255,123,123,0.08)">Elimina</button>
+          </td>
+        </tr>
+      `;
+    }
+
+    async function performOrderAction(action, encodedTs) {
+      const ident = decodeURIComponent(encodedTs || '');
+      if (!ident) return alert('Identificatore ordine mancante');
+
+      if (action === 'delete') {
+        if (!confirm('Sei sicuro di voler eliminare questo ordine? Questa operazione è irreversibile.')) return;
+      }
+
+      // determine whether ident looks like an id (contains '-') or an ISO timestamp
+      const isId = ident.includes('-') && !/\d{4}-\d{2}-\d{2}T/.test(ident);
+
+      try {
+        const payload = isId ? { action, id: ident } : { action, timestamp: ident };
+        const response = await fetch('/api/admin-order-action', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: authHeader },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.ok) return alert(result.error || 'Operazione fallita');
+
+        // update cache and re-render
+        ordersCache = Array.isArray(result.orders) ? result.orders.slice().reverse() : [];
+        renderFiltered();
+        showStatus(action === 'delete' ? 'Ordine eliminato' : 'Stato ordine aggiornato');
+      } catch (err) {
+        alert('Operazione non riuscita: ' + (err.message || ''));
+      }
+    }
+
+    function showStatus(message) {
+      const banner = document.getElementById('statusBanner');
+      if (!banner) return;
+      banner.textContent = message;
+      banner.classList.remove('hidden');
+      clearTimeout(window.statusTimeout);
+      window.statusTimeout = setTimeout(() => banner.classList.add('hidden'), 3200);
+    }
+
+    function escapeHtml(s) {
+      if (s === undefined || s === null) return '';
+      return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]);
+    }
+
+    function copyEmail(encoded) {
+      const email = decodeURIComponent(encoded || '');
+      if (!email) return alert('Nessuna email disponibile in questo ordine.');
+      navigator.clipboard?.writeText(email).then(() => alert('Email copiata: ' + email)).catch(() => alert('Copia non supportata.'));
+    }
+
+    function logout() {
+      authHeader = '';
+      ordersCache = [];
+      document.getElementById('loginView').classList.remove('hidden');
+      document.getElementById('ordersView').classList.add('hidden');
+      document.getElementById('username').value = '';
+      document.getElementById('password').value = '';
+      document.getElementById('searchInput').value = '';
+    }
+  </script>
+</body>
+</html>
