@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>DebateOver | Calcolatore di Ragione Ufficiale</title>
+    
+    <!-- Google Fonts: Cinzel per lo stile formale/regale, Plus Jakarta Sans per la leggibilità moderna -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Windsong:wght@500&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome per icone premium -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #111116;
+            --bg-card: #171721;
+            --bg-card-hover: #1e1e2b;
+            --gold: #ffcc00;
+            --gold-secondary: #d4af37;
+            --gold-gradient: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
+            --gold-glow: 0 0 20px rgba(255, 204, 0, 0.2);
+            --gold-glow-strong: 0 0 35px rgba(255, 204, 0, 0.4);
+            --text-main: #ffffff;
+            --text-muted: #9e9eb4;
+            --border-color: rgba(255, 204, 0, 0.15);
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header / Navbar */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(17, 17, 22, 0.85);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-badge {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-family: var(--font-body);
+            font-weight: 800;
+            background: var(--gold-gradient);
+            color: #000;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 1px;
+            vertical-align: middle;
+            box-shadow: 0 2px 10px rgba(255, 204, 0, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+        }
+
+        .btn-nav {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-nav:hover {
+            background: var(--gold-gradient);
+            color: #000;
+            box-shadow: var(--gold-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 80px 0 40px 0;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 204, 0, 0.12) 0%, rgba(17, 17, 22, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .hero-badge-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 204, 0, 0.08);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 50px;
+            color: var(--gold);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* Configurator Panel Layout */
+        .creator {
+            padding: 40px 0 100px 0;
+        }
+
+        .creator-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 50px;
+            align-items: flex-start;
+        }
+
+        .creator-form-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        }
+
+        .creator-form-panel h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .creator-form-panel p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px 18px;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.15);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-giant-cta {
+            background: var(--gold-gradient);
+            color: #000;
+            border: none;
+            width: 100%;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-weight: 900;
+            font-size: 1.15rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            box-shadow: var(--gold-glow);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-giant-cta:hover {
+            transform: scale(1.02);
+            box-shadow: var(--gold-glow-strong);
+            filter: brightness(1.1);
+        }
+
+        /* Gauge Column & Sticky Box */
+        .preview-sticky {
+            position: sticky;
+            top: 110px;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Gauge Panel Styling */
+        .gauge-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .gauge-title {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        /* SVG Speedometer/Gauge Container */
+        .gauge-container {
+            width: 100%;
+            max-width: 320px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        /* Synchronized Arc and Needle Transitions */
+        #gauge-progress {
+            transition: stroke-dashoffset 1.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .gauge-needle {
+            transform-origin: 100px 100px;
+            transform: rotate(0deg); /* 0% points directly Left (0 degrees rotation) */
+            transition: transform 1.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Percentage Readout in Center */
+        .gauge-value {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 900;
+            fill: #fff;
+            text-anchor: middle;
+        }
+
+        /* Verdetto Pergamena Box */
+        .verdetto-box {
+            background: radial-gradient(circle, #fcfaf2 0%, #f4eee1 100%);
+            border: 4px double #b8860b;
+            outline: 1px solid #d4af37;
+            border-radius: 8px;
+            padding: 24px;
+            color: #1a1a1a;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            transition: all 0.5s ease;
+            opacity: 0.6;
+        }
+
+        .verdetto-box.active {
+            opacity: 1;
+            transform: translateY(0);
+            box-shadow: var(--gold-glow-strong);
+        }
+
+        .verdetto-box h4 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: #8b1414;
+            margin-bottom: 8px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px dashed rgba(139, 20, 20, 0.2);
+            padding-bottom: 8px;
+        }
+
+        .verdetto-text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #222;
+        }
+
+        /* Footer */
+        footer {
+            background: #0b0b0e;
+            border-top: 1px solid var(--border-color);
+            padding: 60px 0 30px 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-disclaimer {
+            font-size: 0.8rem;
+            color: #555566;
+            max-width: 650px;
+            margin: 20px auto 30px auto;
+            line-height: 1.5;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: #444455;
+            border-top: 1px solid rgba(255,255,255,0.03);
+            padding-top: 20px;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 992px) {
+            .creator-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .preview-sticky {
+                position: relative;
+                top: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .creator-form-panel, .gauge-panel {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Nav -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-scroll" style="color:#ffcc00"></i>
+                <span>DebateOver</span> <div class="logo-badge">Ufficiale</div>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#come-funziona" class="nav-link">Come Funziona</a>
+                <a href="index.html#prezzi" class="nav-link">Pacchetti</a>
+                <a href="index.html#personalizza" class="btn-nav">Reclama Ragione</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge-top">
+                <i class="fa-solid fa-calculator"></i> Strumento Scientifico d'Analisi
+            </div>
+            <h1>Calcolatore di <span>Percentuale di Ragione</span></h1>
+            <p>Sei davvero sicuro di avere ragione al 100% o la tua è solo ostinazione temporanea? Scoprilo compilando il nostro test algoritmico ufficiale.</p>
+        </div>
+    </section>
+
+    <!-- Configurator & Live Preview Section -->
+    <section class="creator">
+        <div class="container">
+            <div class="creator-grid">
+                <!-- Left Column: Calcolatore Form -->
+                <div class="creator-form-panel">
+                    <h3>Verifica Scientifica</h3>
+                    <p>Compila i parametri del dibattito per permettere all'algoritmo di valutare il tuo tasso reale di ragione.</p>
+                    
+                    <form id="calculator-form">
+                        <div class="form-group">
+                            <label for="calc-tu">Il tuo nome:</label>
+                            <input type="text" id="calc-tu" maxlength="40" placeholder="Es. Marco il Saggio" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="calc-avversario">Nome dell'ostinato oppositore:</label>
+                            <input type="text" id="calc-avversario" maxlength="40" placeholder="Es. Francesca la Cocciuta" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="calc-disputa">La questione controversa:</label>
+                            <input type="text" id="calc-disputa" maxlength="120" placeholder="Es. Mettere l'ananas sulla pizza" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="calc-tono">Tono usato dall'avversario durante il litigio:</label>
+                            <select id="calc-tono" required>
+                                <option value="superbo">Presuntuoso e irriverente (+25% Ragione a te)</option>
+                                <option value="urlato">Urla prive di argomenti logici (+15% Ragione a te)</option>
+                                <option value="passivo">Passivo-aggressivo insidioso (+10% Ragione a te)</option>
+                                <option value="silenzio">Silenzio ostinato di disapprovazione (+5% Ragione a te)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="calc-fonti">Hai citato fonti attendibili o screenshot?</label>
+                            <select id="calc-fonti" required>
+                                <option value="si">Sì, ho esibito prove inconfutabili (+30% Ragione)</option>
+                                <option value="inventate">Le ho inventate sul momento ma con forte carisma (+15% Ragione)</option>
+                                <option value="no">No, andavo a puro istinto e memoria storica (+5% Ragione)</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn-giant-cta">
+                            <i class="fa-solid fa-square-poll-vertical"></i> Avvia Calcolo Algoritmico
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right Column: Gauge & Verdetto Panel -->
+                <div class="preview-sticky">
+                    <div class="gauge-panel">
+                        <div class="gauge-title">Tasso di Ragione Rilevato</div>
+                        
+                        <div class="gauge-container">
+                            <svg viewBox="0 0 200 130" width="100%">
+                                <!-- Gradients -->
+                                <defs>
+                                    <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#b8860b" />
+                                        <stop offset="50%" stop-color="#ffd700" />
+                                        <stop offset="100%" stop-color="#ffcc00" />
+                                    </linearGradient>
+                                </defs>
+                                
+                                <!-- Arc Background (Top half arc from 20,100 to 180,100) -->
+                                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#222230" stroke-width="12" stroke-linecap="round"/>
+                                
+                                <!-- Active Colored Arc (Progress) -->
+                                <path id="gauge-progress" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#gaugeGradient)" stroke-width="12" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="251"/>
+                                
+                                <!-- Needle Pin and Base -->
+                                <circle cx="100" cy="100" r="8" fill="#ffd700"/>
+                                <circle cx="100" cy="100" r="4" fill="#000"/>
+                                
+                                <!-- Physical Needle (Starts at 0% / Left side pointing at x=35, y=100) -->
+                                <line id="gauge-needle" x1="100" y1="100" x2="35" y2="100" stroke="#ffcc00" stroke-width="4" stroke-linecap="round" class="gauge-needle"/>
+                                
+                                <!-- Value Text in the center -->
+                                <text x="100" y="125" id="gauge-text" class="gauge-value">0%</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Output Verdetto Panel -->
+                    <div class="verdetto-box" id="verdetto-box">
+                        <h4 id="verdetto-header">In attesa dei dati</h4>
+                        <div class="verdetto-text" id="verdetto-text">
+                            Inserisci i tuoi dati nel pannello di sinistra e avvia l'analisi per osservare l'ago puntare verso la verità assoluta.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <i class="fa-solid fa-scroll" style="color:#ffcc00; margin-right: 8px;"></i><span>Debate Over</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">L'autorità suprema nel dare ragione a chi ha effettivamente, palesemente ragione.</p>
+            <div class="footer-disclaimer">
+                <strong>Disclaimer Satirico:</strong> "Debate Over" è un servizio goliardico e umoristico. I certificati e i calcoli generati non costituiscono pareri legali o matematici con valore scientifico e sono intesi solo per divertimento e risoluzione amichevole delle liti quotidiane.
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#come-funziona">Come Funziona</a>
+                <a href="index.html#prezzi">Pacchetti</a>
+                <a href="index.html#personalizza">Inizia Ora</a>
+            </div>
+            <div class="footer-copyright">
+                &copy; 2026 Debate Over. Tutti i diritti (e le ragioni) riservati. Creato con orgoglio e goliardia.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logica di Calcolo Interattiva -->
+    <script>
+        document.getElementById('calculator-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Acquisizione Valori Form
+            const nomeTu = document.getElementById('calc-tu').value.trim();
+            const nomeAvversario = document.getElementById('calc-avversario').value.trim();
+            const disputa = document.getElementById('calc-disputa').value.trim();
+            const tonoVal = document.getElementById('calc-tono').value;
+            const fontiVal = document.getElementById('calc-fonti').value;
+
+            // Algoritmo di calcolo goliardico (minimo 55% per salvaguardare il tuo ego)
+            let ragioneBase = Math.floor(Math.random() * 20) + 55;
+
+            // Incrementi basati sui parametri selezionati
+            if (tonoVal === 'superbo') ragioneBase += 20;
+            else if (tonoVal === 'urlato') ragioneBase += 12;
+            else if (tonoVal === 'passivo') ragioneBase += 8;
+            else ragioneBase += 4;
+
+            if (fontiVal === 'si') ragioneBase += 25;
+            else if (fontiVal === 'inventate') ragioneBase += 12;
+            else ragioneBase += 4;
+
+            // Cap massimo della ragione al 100%
+            if (ragioneBase > 100) ragioneBase = 100;
+
+            // --- ANIMAZIONE SINCRONIZZATA (0% -> 100%) ---
+            // 0% equivale a 0 gradi di rotazione (lancetta a sinistra su x=35, y=100)
+            // 100% equivale a 180 gradi di rotazione (lancetta a destra su x=165, y=100)
+            const gradiRotazione = ragioneBase * 1.8; 
+            const needle = document.getElementById('gauge-needle');
+            needle.style.transform = `rotate(${gradiRotazione}deg)`;
+
+            // Sincronizzazione dell'arco colorato progressivo (Stroke Dashoffset)
+            const progress = document.getElementById('gauge-progress');
+            const strokeOffset = 251 - (251 * ragioneBase / 100);
+            progress.style.strokeDashoffset = strokeOffset;
+
+            // Contatore numerico progressivo fluido sincrono
+            let currentPercent = 0;
+            const duration = 1800; // 1.8 Secondi (Coerente con i 1.8s di transizione CSS)
+            const startTime = performance.now();
+
+            function updateCounter(now) {
+                const elapsed = now - startTime;
+                const fraction = Math.min(elapsed / duration, 1);
+                
+                // Formula Ease-Out Cubic per decelerare in sincrono con la fisica della lancetta
+                const easeOutCubic = 1 - Math.pow(1 - fraction, 3);
+                currentPercent = Math.floor(easeOutCubic * ragioneBase);
+                
+                document.getElementById('gauge-text').textContent = `${currentPercent}%`;
+
+                if (fraction < 1) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    document.getElementById('gauge-text').textContent = `${ragioneBase}%`;
+                }
+            }
+            requestAnimationFrame(updateCounter);
+
+            // Scrittura dei Verdetti Dinamici
+            let verdettoTesto = '';
+            let verdettoTitolo = '';
+
+            if (ragioneBase === 100) {
+                verdettoTitolo = `Perfezione Logica`;
+                verdettoTesto = `<strong>Trionfo assoluto ed ineluttabile per ${nomeTu}!</strong> L'oppositore ${nomeAvversario} farebbe bene a presentare scuse formali immediate ed incondizionate per evitare ulteriori umiliazioni sul tema "${disputa}".`;
+            } else if (ragioneBase >= 85) {
+                verdettoTitolo = `Sentenza Favorevole`;
+                verdettoTesto = `<strong>Vittoria schiacciante.</strong> Il calcolatore attesta che ${nomeTu} possiede un controllo formidabile della logica sul tema "${disputa}". A ${nomeAvversario} resta solo una misera e fragile opinione smentita dai fatti.`;
+            } else {
+                verdettoTitolo = `Supremazia Rilevata`;
+                verdettoTesto = `La ragione pende significativamente a favore di <strong>${nomeTu}</strong>. ${nomeAvversario} è invitato ufficialmente dalle autorità logiche a desistere dal prolungare la disputa.`;
+            }
+
+            // Attivazione visiva della pergamena del verdetto
+            const box = document.getElementById('verdetto-box');
+            box.classList.add('active');
+            document.getElementById('verdetto-header').textContent = verdettoTitolo;
+            document.getElementById('verdetto-text').innerHTML = verdettoTesto;
+
+            // Scorrimento fluido sul mobile
+            if (window.innerWidth <= 992) {
+                box.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+</html>

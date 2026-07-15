@@ -1,0 +1,28 @@
+REALIZZARE UNA SPECIE DI CONTATORE DELLE INFORMAZIONI
+IN BASE  A DUE FATTI RAGIONE A RAGIONE B stima la percentuale della ragione di un individuo
+
+1. 🎭 L'Esperienza di Compilazione Dinamica
+Invece del solito form statico noioso, possiamo creare un percorso guidato a step animati (Multi-step Form):
+
+Step 1: "Chi è il genio che ha ragione?" (Inserisci il tuo nome con un'animazione che fa risaltare il vincitore).
+
+Step 2: "Chi è la controparte ostinata che ha torto?"
+
+Step 3: "Su cosa state dibattendo?" (Con un contatore di caratteri dinamico).
+
+Step 4: Scegli il pacchetto con delle card interattive che si illuminano o si ingrandiscono al passaggio del mouse.
+
+
+3. 📊 Un Widget Interattivo: "Il Calcolatore di Ragione"
+Prima ancora di far compilare il form, possiamo mettere in home page un simulatore o calcolatore interattivo dove l'utente muove degli slider per "calcolare" matematicamente la percentuale di ragione che ha nella disputa!
+Ad esempio:
+
+Livello di testardaggine dell'avversario: 90%
+
+Prove schiaccianti in tuo possesso: 95%
+
+Ore passate a discutere: 5 ore
+
+Risultato in tempo reale: "Hai scientificamente il 98.4% di Ragione. Richiedi il certificato!"
+
+Questo aumenta tantissimo la conversione perché l'utente si diverte, gioca con il sito e poi vuole comprare davvero il certificato
